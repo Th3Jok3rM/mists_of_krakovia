@@ -5,6 +5,8 @@ public class StartDedicatedServer : MonoBehaviour
 {
     void Start()
     {
-        NetworkManager.singleton.StartServer();
+        // NetworkManager.singleton.StartServer();
+        NetworkManager.singleton.StartHost();
+
     }
 }
