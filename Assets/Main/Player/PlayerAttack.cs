@@ -6,12 +6,9 @@ public class PlayerAttack : NetworkBehaviour
     [Header("Attack Settings")]
     public float damageAmount = 25f;
     public LayerMask enemyLayers;
-    
-    [Header("Input Settings")]
-    public KeyCode attackKey = KeyCode.Space;
 
-    private SpriteRenderer spriteAtack;
-    public GameObject playerAtack;
+    private SpriteRenderer spriteAttack;
+    public GameObject playerAttack;
     public GameObject playerAim;
     
     [Header("Visual Settings")]
@@ -23,12 +20,12 @@ public class PlayerAttack : NetworkBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        spriteAtack = playerAtack.GetComponent<SpriteRenderer>();
+        spriteAttack = playerAttack.GetComponent<SpriteRenderer>();
 
         // Garante que o sprite de ataque comece invisível
-        if (spriteAtack != null)
+        if (spriteAttack != null)
         {
-            spriteAtack.enabled = false;
+            spriteAttack.enabled = false;
         }
     }
 
@@ -72,7 +69,7 @@ public class PlayerAttack : NetworkBehaviour
         // Calcula o ponto de ataque relativo à posição do jogador
         
         // Detecta inimigos na área de ataque com rotação de 90 graus (3D)
-        Collider[] hitEnemies = Physics.OverlapBox(playerAtack.transform.position, new Vector3 (playerAtack.transform.localScale.x/2, playerAtack.transform.localScale.y/2, 0), Quaternion.Euler(0, 0, 90f), enemyLayers);
+        Collider[] hitEnemies = Physics.OverlapBox(playerAttack.transform.position, new Vector3 (playerAttack.transform.localScale.x/2, playerAttack.transform.localScale.y/2, 0), Quaternion.Euler(90f, 0, 0), enemyLayers);
 
         foreach (Collider enemy in hitEnemies)
         {
@@ -91,7 +88,7 @@ public class PlayerAttack : NetworkBehaviour
     void OnDrawGizmosSelected()
     {
         // Calcula a posição do gizmo
-        Vector3 gizmoPosition = playerAtack.transform.position;
+        Vector3 gizmoPosition = playerAttack.transform.position;
         
         // Salva a matriz atual e aplica rotação de 90 graus
         Matrix4x4 oldMatrix = Gizmos.matrix;
@@ -102,11 +99,11 @@ public class PlayerAttack : NetworkBehaviour
         
         // Desenha um cubo wireframe com o MESMO tamanho usado no OverlapBox (localScale completo)
         // OverlapBox usa half-extents, mas o gizmo DrawCube já espera tamanho completo
-        Gizmos.DrawWireCube(Vector3.zero, new Vector3 (playerAtack.transform.localScale.x, playerAtack.transform.localScale.y, 0));
+        Gizmos.DrawWireCube(Vector3.zero, new Vector3 (playerAttack.transform.localScale.x, playerAttack.transform.localScale.y, 0));
         
         // Opcionalmente, desenha um cubo semi-transparente para melhor visualização
         Gizmos.color = new Color(1, 0, 0, 0.3f); // Vermelho com transparência
-        // Gizmos.DrawCube(Vector3.zero, playerAtack.transform.localScale);
+        // Gizmos.DrawCube(Vector3.zero, playerAttack.transform.localScale);
         
         // Restaura a matriz original
         Gizmos.matrix = oldMatrix;
@@ -114,9 +111,9 @@ public class PlayerAttack : NetworkBehaviour
     
     void ShowAttackVisual()
     {
-        if (spriteAtack != null)
+        if (spriteAttack != null)
         {
-            spriteAtack.enabled = true;
+            spriteAttack.enabled = true;
             isShowingAttack = true;
             attackVisualTimer = attackVisualDuration;
             
@@ -125,9 +122,9 @@ public class PlayerAttack : NetworkBehaviour
     
     void HideAttackVisual()
     {
-        if (spriteAtack != null)
+        if (spriteAttack != null)
         {
-            spriteAtack.enabled = false;
+            spriteAttack.enabled = false;
             isShowingAttack = false;
             attackVisualTimer = 0f;
         }

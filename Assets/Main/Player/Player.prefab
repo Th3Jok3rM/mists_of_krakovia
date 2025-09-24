@@ -557,8 +557,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.18
+  m_Height: 0.61
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7677311498946519643
@@ -693,8 +693,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 8
-  attackKey: 32
-  playerAtack: {fileID: 4881600084101138031}
+  playerAttack: {fileID: 4881600084101138031}
   playerAim: {fileID: 1259612579486527891}
   attackVisualDuration: 0.2
 --- !u!1 &7544945887069866091

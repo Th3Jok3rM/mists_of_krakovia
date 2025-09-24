@@ -15,7 +15,13 @@ public class PlayerMovement : NetworkBehaviour
         if (!isLocalPlayer)
         {
             Destroy(rb);
-            Destroy(GetComponentInChildren<Camera>().gameObject);
+
+            Camera cam = GetComponentInChildren<Camera>();
+            if (cam != null)
+            {
+                Destroy(cam.gameObject);
+            }
+                
             return;
         }
     }
