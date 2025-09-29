@@ -28,7 +28,6 @@ public class PlayerHealth : NetworkBehaviour
     void Update()
     {
 
-
     }
 
     public void onHealthChanged(float oldHealth, float newHealth)
